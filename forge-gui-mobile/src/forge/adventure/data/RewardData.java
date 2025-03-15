@@ -230,24 +230,15 @@ public class RewardData implements Serializable {
                                 .filter(CardEdition::hasBoosterTemplate)
                                 .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
-
                         for (String restricted : configData.restrictedEditions) {
-                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                            allEditions.removeIf(q -> q.getName().equals(restricted));
                         }
-
-                        for(String restrictedCard: configData.restrictedCards)
-                        {
-
-                            allEditions.removeIf(cardEdition -> cardEdition.getAllCardsInSet().stream().anyMatch(
-                                    o -> o.name.equals(restrictedCard)
-                            )
-                            );
-                        }
-
-
+                        System.out.println(allEditions);
                         for(int i=0;i<count+addedCount;i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(Aggregates.random(allEditions).getCode())));
+
                         }
+
                     }
                     else
                     {
