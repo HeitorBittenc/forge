@@ -242,7 +242,7 @@ public class RewardData implements Serializable {
                             );
                         }
                         for(int i=0;i<count+addedCount;i++) {
-                            ret.add(new Reward(AdventureEventController.instance().generateBooster(Aggregates.random(allEditions).getCode())));
+                            ret.add(new Reward(AdventureEventController.instance().generateBooster(allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
                         }
                     }
                     else
